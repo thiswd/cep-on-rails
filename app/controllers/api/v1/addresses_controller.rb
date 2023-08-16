@@ -1,4 +1,5 @@
 class Api::V1::AddressesController < ApplicationController
+  before_action :authenticate_api_v1_user!
   before_action :clean_cep
   before_action :set_user
 

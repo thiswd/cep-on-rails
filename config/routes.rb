@@ -5,7 +5,7 @@ Rails.application.routes.draw do
         sessions: "api/v1/users/sessions"
       }
 
-      get "/users/:user_id/addresses", to: "addresses#find_by_cep", constraints: { cep: /[0-9]{8}/ }
+      get "/users/:user_id/addresses", to: "addresses#find_by_cep"
     end
   end
 end
