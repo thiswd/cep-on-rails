@@ -15,22 +15,22 @@ RSpec.describe FetchAddressService do
     expect(result).to eq(valid_response.with_indifferent_access)
   end
 
-  it 'returns error for invalid CEP format' do
+  it 'raises InvalidCepFormat error for invalid CEP' do
     service = FetchAddressService.new(invalid_cep)
-    result = service.call
-
-    expect(result[:status]).to eq(:bad_request)
-    expect(result[:message]).to eq(I18n.t('errors.invalid_cep_format'))
+    expect { service.call }.to raise_error(CepExceptions::InvalidCepFormat)
   end
 
-  it 'returns error when CEP is not found' do
-    stub_request(:get, "https://viacep.com.br/ws/#{valid_cep}/json").
-      to_return(status: 200, body: { 'erro' => true }.to_json)
+  context 'when CEP is not found' do
+    let(:not_found_cep) { '99999999' }
 
-    service = FetchAddressService.new(valid_cep)
-    result = service.call
+    before do
+      stub_request(:get, "https://viacep.com.br/ws/#{not_found_cep}/json")
+        .to_return(body: '{"erro": true}', status: 200)
+    end
 
-    expect(result[:status]).to eq(:not_found)
-    expect(result[:message]).to eq(I18n.t('errors.cep_not_found'))
+    it 'raises CepNotFound error' do
+      service = FetchAddressService.new(not_found_cep)
+      expect { service.call }.to raise_error(CepExceptions::CepNotFound)
+    end
   end
 end
