@@ -4,6 +4,20 @@
 
 "CEP on Rails" is a REST API that returns address data based on the provided Brazilian Postal Code (CEP). It is designed considering high volume of access. The API features token-based authentication and associates the queried addresses with the requesting user.
 
+## Features
+
+- **User Authentication**: Secure user authentication via JSON Web Tokens (JWT).
+- **CEP Lookup**: Retrieve full address data by providing a valid CEP (Brazilian postal code).
+- **High Performance**: Optimized for high-traffic use cases, using caching strategies with Redis and Memcache.
+- **Error Handling**: Comprehensive error handling that provides clear and actionable error messages.
+- **Rate Limiting**: Protects the API from abuse with rate limiting (default is 6 calls in 30 seconds).
+- **Test Coverage**: Well-tested codebase to ensure stability and reliability.
+- **Docker Support**: Easy to deploy with Docker, ensuring a consistent environment.
+
+## Use Case
+
+Whether you are building an e-commerce platform, a logistics application, or any system that needs to process and validate Brazilian addresses, **CEP on Rails** can help you deliver a smoother user experience by automating and validating address entries.
+
 ## Requirements
 
 - Ruby 3.2.0
