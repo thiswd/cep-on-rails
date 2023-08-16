@@ -8,3 +8,5 @@ en:
     service_error: "An error occurred while calling the service."
     timeout_error: "The request timed out."
     duplicate_address_error: "This address already exists for this user."
+    already_associated_error: "CEP already associated with this user."
+    address_validation_error: "Validation failed: %{errors}"

@@ -12,7 +12,7 @@ class CreateAddressService
     if address.save
       { status: :created, data: address }
     else
-      raise CepExceptions::DuplicateAddressError, I18n.t('errors.duplicate_address_error')
+      raise CepExceptions::AddressValidationError.new(address.errors.full_messages.to_sentence)
     end
   end
 
