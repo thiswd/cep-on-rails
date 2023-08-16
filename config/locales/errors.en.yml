@@ -1,0 +1,10 @@
+en:
+  errors:
+    invalid_cep_format: "Invalid CEP format."
+    cep_not_found: "CEP not found."
+    user_not_found: "User not found."
+    failed_to_save_address: "Failed to save address."
+    something_went_wrong: "Something went wrong."
+    service_error: "An error occurred while calling the service."
+    timeout_error: "The request timed out."
+    duplicate_address_error: "This address already exists for this user."
