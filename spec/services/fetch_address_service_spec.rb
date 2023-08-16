@@ -18,7 +18,7 @@ RSpec.describe FetchAddressService do
 
   it 'raises InvalidCepFormat error for invalid CEP' do
     service = FetchAddressService.new(invalid_cep, user)
-    expect { service.check_cep }.to raise_error(CepExceptions::InvalidCepFormat)
+    expect { service.call }.to raise_error(CepExceptions::InvalidCepFormat)
   end
 
   context 'when CEP is not found' do

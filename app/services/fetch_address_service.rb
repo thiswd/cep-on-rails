@@ -13,6 +13,17 @@ class FetchAddressService
     @user = user
   end
 
+  def call
+    check_cep
+    fetch_cep
+  rescue Net::HTTPClientError, Net::HTTPServerError
+    raise CepExceptions::ServiceError, I18n.t('errors.service_error')
+  rescue Net::OpenTimeout, Timeout::Error
+    raise CepExceptions::TimeoutError, I18n.t('errors.timeout_error')
+  end
+
+  private
+
   def check_cep
     raise CepExceptions::InvalidCepFormat unless valid_cep_format?
 
@@ -21,7 +32,7 @@ class FetchAddressService
     end
   end
 
-  def call
+  def fetch_cep
     response = Net::HTTP.get(uri_url)
     result = JSON.parse(response)
 
@@ -30,13 +41,7 @@ class FetchAddressService
     else
       result
     end
-  rescue Net::HTTPClientError, Net::HTTPServerError
-    raise CepExceptions::ServiceError, I18n.t('errors.service_error')
-  rescue Net::OpenTimeout, Timeout::Error
-    raise CepExceptions::TimeoutError, I18n.t('errors.timeout_error')
   end
-
-  private
 
   def uri_url
     URI("#{CEP_API_PATH}#{cep}/#{RESPONSE_FORMAT}")

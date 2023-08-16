@@ -6,7 +6,6 @@ class Api::V1::AddressesController < ApplicationController
   def create
     begin
       fetch_service = FetchAddressService.new(@cep, @user)
-      fetch_service.check_cep
       fetch_result = fetch_service.call
 
       serialized_address = SerializeAddressService.new(fetch_result).serialize
