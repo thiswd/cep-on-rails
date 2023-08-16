@@ -56,4 +56,9 @@ Rails.application.configure do
 
   # Uncomment if you wish to allow Action Cable access from any origin.
   # config.action_cable.disable_request_forgery_protection = true
+  config.cache_store = :mem_cache_store, "memcached:11211", {
+    namespace: "cep-on-rails",
+    expires_in: 1.day,
+    compress: true
+  }
 end
