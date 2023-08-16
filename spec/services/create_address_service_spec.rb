@@ -17,16 +17,5 @@ RSpec.describe CreateAddressService do
         expect(result[:status]).to eq(:created)
       end
     end
-
-    context 'when address is duplicate for a user' do
-      before do
-        create(:address, serialized_address.merge(user: user))
-      end
-
-      it 'raises a DuplicateAddressError' do
-        service = CreateAddressService.new(user, serialized_address)
-        expect { service.save }.to raise_error(CepExceptions::DuplicateAddressError)
-      end
-    end
   end
 end

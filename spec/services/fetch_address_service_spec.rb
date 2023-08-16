@@ -1,6 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe FetchAddressService do
+  let(:user) { create(:user) }
   let(:valid_cep) { '01001000' }
   let(:invalid_cep) { '123456789' }
   let(:valid_response) { build(:address_response) }
@@ -9,15 +10,15 @@ RSpec.describe FetchAddressService do
     stub_request(:get, "https://viacep.com.br/ws/#{valid_cep}/json").
       to_return(status: 200, body: valid_response.to_json)
 
-    service = FetchAddressService.new(valid_cep)
+    service = FetchAddressService.new(valid_cep, user)
     result = service.call
 
     expect(result).to eq(valid_response.with_indifferent_access)
   end
 
   it 'raises InvalidCepFormat error for invalid CEP' do
-    service = FetchAddressService.new(invalid_cep)
-    expect { service.call }.to raise_error(CepExceptions::InvalidCepFormat)
+    service = FetchAddressService.new(invalid_cep, user)
+    expect { service.check_cep }.to raise_error(CepExceptions::InvalidCepFormat)
   end
 
   context 'when CEP is not found' do
@@ -29,7 +30,7 @@ RSpec.describe FetchAddressService do
     end
 
     it 'raises CepNotFound error' do
-      service = FetchAddressService.new(not_found_cep)
+      service = FetchAddressService.new(not_found_cep, user)
       expect { service.call }.to raise_error(CepExceptions::CepNotFound)
     end
   end

@@ -39,7 +39,7 @@ class FetchAddressService
   private
 
   def uri_url
-    URI("#{CEP_API_PATH}#{cep}/#{res_format}")
+    URI("#{CEP_API_PATH}#{cep}/#{RESPONSE_FORMAT}")
   end
 
   def valid_cep_format?
