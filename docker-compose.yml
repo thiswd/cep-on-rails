@@ -41,6 +41,14 @@ services:
     networks:
       - backend
 
+  memcached:
+    image: 'memcached:latest'
+    container_name: cep-cache
+    ports:
+      - '11211:11211'
+    networks:
+      - backend
+
 networks:
   backend:
     name: cep_on_rails_network

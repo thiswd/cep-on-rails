@@ -39,5 +39,7 @@ module CepOnRails
     config.generators do |g|
       g.templates << File.expand_path('lib/generators', __dir__)
     end
+
+    config.middleware.use Rack::Attack
   end
 end
