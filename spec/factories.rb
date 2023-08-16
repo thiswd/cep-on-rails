@@ -5,6 +5,16 @@ FactoryBot.define do
     jti { SecureRandom.uuid }
   end
 
+  factory :address do
+    association :user
+    cep { '12345678' }
+    street_name { 'Some Street' }
+    complement { 'Some Complement' }
+    neighborhood { 'Some Neighborhood' }
+    city { 'Some City' }
+    state { 'Some State' }
+  end
+
   factory :address_response, class: Hash do
     cep { '01001-000' }
     logradouro { 'Praça da Sé' }
