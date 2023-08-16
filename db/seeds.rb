@@ -7,7 +7,7 @@
 #   Character.create(name: "Luke", movie: movies.first)
 email = "jaiminho@correios.gov.br"
 password = "tangamandapio"
-user = User.new(email: email, password: password)
+user = User.new(email:, password:)
 
 if user.save
   puts "User created"

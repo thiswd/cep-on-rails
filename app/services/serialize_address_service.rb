@@ -15,5 +15,4 @@ class SerializeAddressService
       state: raw_address["uf"]
     }
   end
-
 end

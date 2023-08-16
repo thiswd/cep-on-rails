@@ -10,8 +10,8 @@ class User < ApplicationRecord
 
   def for_display
     {
-      id: id,
-      email: email
+      id:,
+      email:
     }
   end
 end

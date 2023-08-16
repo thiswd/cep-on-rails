@@ -12,8 +12,7 @@ class CreateAddressService
     if address.save
       { status: :created, data: address }
     else
-      raise CepExceptions::AddressValidationError.new(address.errors.full_messages.to_sentence)
+      raise CepExceptions::AddressValidationError, address.errors.full_messages.to_sentence
     end
   end
-
 end

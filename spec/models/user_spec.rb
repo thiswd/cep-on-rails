@@ -4,7 +4,7 @@ RSpec.describe User, type: :model do
   it { should validate_presence_of(:email) }
   it { should validate_uniqueness_of(:email).case_insensitive }
 
-  it "should have a valid jti" do
+  it "has a valid jti" do
     user = build(:user)
     expect(user.jti).to be_present
   end

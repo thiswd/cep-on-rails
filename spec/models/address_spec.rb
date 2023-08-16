@@ -17,7 +17,7 @@ RSpec.describe Address, type: :model do
 
   describe "valid address" do
     let(:user) { create(:user) }
-    let(:address) { build(:address, user: user) }
+    let(:address) { build(:address, user:) }
 
     it "is valid with valid attributes" do
       expect(address).to be_valid
@@ -26,7 +26,7 @@ RSpec.describe Address, type: :model do
 
   describe "invalid address" do
     let(:user) { create(:user) }
-    let(:address) { build(:address, user: user, cep: nil) }
+    let(:address) { build(:address, user:, cep: nil) }
 
     it "is not valid without a cep" do
       expect(address).not_to be_valid

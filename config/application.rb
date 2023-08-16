@@ -37,7 +37,7 @@ module CepOnRails
     config.api_only = true
 
     config.generators do |g|
-      g.templates << File.expand_path('lib/generators', __dir__)
+      g.templates << File.expand_path("lib/generators", __dir__)
     end
 
     config.middleware.use Rack::Attack
