@@ -3,7 +3,7 @@ class Api::V1::AddressesController < ApplicationController
   before_action :clean_cep
   before_action :set_user
 
-  def find_by_cep
+  def create
     begin
       fetch_service = FetchAddressService.new(@cep)
       fetch_result = fetch_service.call
@@ -35,7 +35,11 @@ class Api::V1::AddressesController < ApplicationController
   private
 
   def clean_cep
-    @cep ||= params[:cep].to_s.gsub(/\D/, "")
+    @cep ||= address_params[:cep].to_s.gsub(/\D/, "")
+  end
+
+  def address_params
+    params.require(:address).permit(:cep)
   end
 
   def set_user

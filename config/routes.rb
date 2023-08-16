@@ -5,7 +5,9 @@ Rails.application.routes.draw do
         sessions: "api/v1/users/sessions"
       }
 
-      get "/users/:user_id/addresses", to: "addresses#find_by_cep"
+      resources :users, only: [] do
+        resources :addresses, only: [:create]
+      end
     end
   end
 end
