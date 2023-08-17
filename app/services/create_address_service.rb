@@ -10,7 +10,7 @@ class CreateAddressService
     address = user.addresses.new(serialized_address)
 
     if address.save
-      { status: :created, data: address }
+      address
     else
       raise CepExceptions::AddressValidationError, address.errors.full_messages.to_sentence
     end

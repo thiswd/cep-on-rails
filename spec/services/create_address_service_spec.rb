@@ -10,12 +10,6 @@ RSpec.describe CreateAddressService do
         service = CreateAddressService.new(user, serialized_address)
         expect { service.save }.to change { Address.count }.by(1)
       end
-
-      it "returns status created" do
-        service = CreateAddressService.new(user, serialized_address)
-        result = service.save
-        expect(result[:status]).to eq(:created)
-      end
     end
   end
 end

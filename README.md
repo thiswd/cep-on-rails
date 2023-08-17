@@ -102,6 +102,7 @@ rspec .
 - Rack CORS (Handling CORS)
 - Rack Attack (Rate Limiting)
 - Dalli (Memcached Client)
+- JBuilder (JSON Template Engine)
 
 ## API Rate Limiting
 The API enforces a rate limit of 6 calls in 30 seconds to prevent abuse.
