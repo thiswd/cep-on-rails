@@ -127,7 +127,7 @@ http://localhost:3000/api/v1/sign_in
 }
 ```
 
-The token expires in five minutes.
+The token expires in ten minutes.
 
 ### Create Address:
 **POST Request to:**
