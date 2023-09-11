@@ -15,7 +15,8 @@ class FetchAddressService
 
   def call
     check_cep
-    fetch_cep
+
+    Rails.cache.fetch(cep, expires_in: 1.day) { fetch_cep }
   rescue Net::HTTPClientError, Net::HTTPServerError
     raise CepExceptions::ServiceError, I18n.t("errors.service_error")
   rescue Net::OpenTimeout, Timeout::Error
@@ -39,6 +40,7 @@ class FetchAddressService
       if result["erro"]
         raise CepExceptions::CepNotFound, I18n.t("errors.cep_not_found")
       else
+        add_to_cache(result)
         result
       end
     end
@@ -59,5 +61,9 @@ class FetchAddressService
       first_part = cep[0...HIFEN_POSITION]
       second_part = cep[HIFEN_POSITION...cep.length]
       "#{first_part}-#{second_part}"
+    end
+
+    def add_to_cache(result)
+      Rails.cache.write(cep, result, expires_in: 1.day)
     end
 end
