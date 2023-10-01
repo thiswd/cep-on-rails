@@ -24,13 +24,13 @@ module Jwt
 
     private
 
-    def secret_key_defined?(env_file_path)
-      File.read(env_file_path).include?("DEVISE_JWT_SECRET_KEY")
-    end
+      def secret_key_defined?(env_file_path)
+        File.read(env_file_path).include?("DEVISE_JWT_SECRET_KEY")
+      end
 
-    def remove_existing_secret_key(env_file_path)
-      content = File.readlines(env_file_path).delete_if { |line| line.include?("DEVISE_JWT_SECRET_KEY") }
-      File.open(env_file_path, "w") { |f| f.write(content.join) }
-    end
+      def remove_existing_secret_key(env_file_path)
+        content = File.readlines(env_file_path).delete_if { |line| line.include?("DEVISE_JWT_SECRET_KEY") }
+        File.write(env_file_path, content.join)
+      end
   end
 end
